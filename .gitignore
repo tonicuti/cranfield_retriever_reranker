@@ -29,3 +29,5 @@ artifacts/models/*
 
 artifacts/runs/*
 !artifacts/runs/.gitkeep
+
+cranfield-dataset
