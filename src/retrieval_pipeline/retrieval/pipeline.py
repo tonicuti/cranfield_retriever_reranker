@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from retrieval_pipeline.config import Settings
-from retrieval_pipeline.data.cranfield_loader import preprocess_text
 from retrieval_pipeline.indexing.faiss_index import FaissIndex
 from retrieval_pipeline.models.embedding_model import EmbeddingModel
 from retrieval_pipeline.models.reranker_model import RerankerModel
@@ -43,13 +42,12 @@ class RetrievalPipeline:
         return cls(retriever=retriever, reranker=reranker, settings=settings)
 
     def search(self, query: str, top_k: int | None = None) -> list[SearchHit]:
-        processed_query = preprocess_text(query)
         requested_top_k = (
             top_k if top_k is not None else self.settings.reranking.top_k_final
         )
         candidate_k = max(self.settings.reranking.top_k_candidates, requested_top_k)
         hits = self.retriever.search(
-            query=processed_query,
+            query=query,
             top_k=candidate_k,
         )
 
@@ -60,7 +58,7 @@ class RetrievalPipeline:
             return hits[:final_top_k]
 
         return self.reranker.rerank(
-            query=processed_query,
+            query=query,
             hits=hits,
             top_k=requested_top_k,
         )
