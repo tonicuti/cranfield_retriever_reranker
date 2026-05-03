@@ -9,7 +9,9 @@ description = "Dense retrieval + FAISS + reranking pipeline for Cranfield"
 requires-python = ">=3.10"
 dependencies = [
   "faiss-cpu>=1.8.0",
+  "nltk>=3.8.0",
   "numpy>=1.26.0",
+  "pandas>=2.0.0",
   "sentence-transformers>=3.0.0",
   "torch>=2.2.0",
 ]

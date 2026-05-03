@@ -22,7 +22,7 @@ flowchart TD
     C --> F{"reranking.enabled ?"}
     F -->|true| G["Load RerankerModel"]
     G --> G1["CrossEncoder<br/>reranking.model"]
-    F -->|false| H["Khong dung reranker"]
+    F -->|false| H["Do not load reranker"]
 
     D1 --> I["DenseRetriever"]
     E1 --> I
@@ -32,7 +32,7 @@ flowchart TD
     I --> J
 
     J --> K["search(query, top_k)"]
-    K --> L["requested_top_k = top_k<br/>hoac reranking.top_k_final"]
+    K --> L["requested_top_k = top_k<br/>or reranking.top_k_final"]
     L --> M["candidate_k = max(reranking.top_k_candidates, requested_top_k)"]
     M --> N["DenseRetriever.search(query, candidate_k)"]
     N --> O["EmbeddingModel.encode_query(query)"]
@@ -40,14 +40,14 @@ flowchart TD
     P --> Q["FaissIndex.search(query_vector, candidate_k)"]
     Q --> R["Candidate SearchHit list<br/>doc_id, FAISS score, text"]
 
-    R --> S{"Co reranker ?"}
-    S -->|khong| T["final_top_k = top_k<br/>hoac indexing.top_k"]
-    T --> U["Tra ve hits[:final_top_k]"]
+    R --> S{"Have reranker ?"}
+    S -->|No| T["final_top_k = top_k<br/>or indexing.top_k"]
+    T --> U["Return hits[:final_top_k]"]
 
-    S -->|co| V["Tao pairs [query, hit.text]"]
+    S -->|Yes| V["Create pairs [query, hit.text]"]
     V --> W["CrossEncoder predict score"]
-    W --> X["Sap xep giam dan theo reranker score"]
-    X --> Y["Tra ve top requested_top_k"]
+    W --> X["Sort in decending order reranker score"]
+    X --> Y["Return top requested_top_k"]
 ```
 
 ## Run
@@ -76,7 +76,6 @@ Result format:
 ```text
 rank    doc_id    score
 ```
-
 
 ### 3. Evaluate on Cranfield
 
