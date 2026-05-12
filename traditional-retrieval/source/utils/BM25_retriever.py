@@ -11,7 +11,10 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 from collections import Counter 
-from textPreprocessing import TextPreprocessing 
+try:
+    from .textPreprocessing import TextPreprocessing
+except ImportError:
+    from textPreprocessing import TextPreprocessing 
 
 logging.basicConfig(format='%(asctime)s %(message)s')
 

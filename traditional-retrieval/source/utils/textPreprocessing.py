@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize, wordpunct_tokenize
 
 logging.basicConfig(format='%(asctime)s %(message)s')
 
@@ -39,7 +39,12 @@ class TextPreprocessing:
     # TOKENIZATION
     # ---------------------------
     def _tokenize(self, text: str):
-        return word_tokenize(text)
+        try:
+            return word_tokenize(text)
+        except LookupError:
+            # Newer NLTK releases may require punkt_tab; fall back to a
+            # tokenizer that does not depend on the punkt models.
+            return wordpunct_tokenize(text)
 
     # ---------------------------
     # REMOVE NUMERIC TOKENS
