@@ -1,0 +1,123 @@
+{
+  "collection": {
+    "document_count": 1398,
+    "query_count": 225,
+    "qrel_query_count": 225
+  },
+  "document_word_lengths": {
+    "count": 1398,
+    "min": 23,
+    "max": 662,
+    "mean": 162.1409155937053,
+    "median": 142.5,
+    "p95": 325
+  },
+  "document_char_lengths": {
+    "count": 1398,
+    "min": 161,
+    "max": 4141,
+    "mean": 1026.480686695279,
+    "median": 908.5,
+    "p95": 1993
+  },
+  "query_word_lengths": {
+    "count": 225,
+    "min": 5,
+    "max": 44,
+    "mean": 17.364444444444445,
+    "median": 17,
+    "p95": 30
+  },
+  "query_char_lengths": {
+    "count": 225,
+    "min": 39,
+    "max": 266,
+    "mean": 113.60444444444444,
+    "median": 106,
+    "p95": 191
+  },
+  "query_type_distribution": {
+    "wh_question": 105,
+    "yes_no_question": 75,
+    "topic_request": 6,
+    "other": 39
+  },
+  "relevance_grade_distribution": {
+    "2": 387,
+    "3": 733,
+    "4": 363,
+    "-1": 225,
+    "1": 128
+  },
+  "relevant_docs_per_query": {
+    "count": 225,
+    "min": 1,
+    "max": 39,
+    "mean": 7.16,
+    "median": 6,
+    "p95": 16
+  },
+  "top_query_terms": [
+    {
+      "term": "the",
+      "count": 249
+    },
+    {
+      "term": "of",
+      "count": 205
+    },
+    {
+      "term": "a",
+      "count": 112
+    },
+    {
+      "term": "in",
+      "count": 88
+    },
+    {
+      "term": "what",
+      "count": 85
+    },
+    {
+      "term": "on",
+      "count": 79
+    },
+    {
+      "term": "to",
+      "count": 63
+    },
+    {
+      "term": "is",
+      "count": 61
+    },
+    {
+      "term": "for",
+      "count": 56
+    },
+    {
+      "term": "flow",
+      "count": 49
+    },
+    {
+      "term": "and",
+      "count": 47
+    },
+    {
+      "term": "are",
+      "count": 42
+    },
+    {
+      "term": "with",
+      "count": 34
+    },
+    {
+      "term": "can",
+      "count": 34
+    },
+    {
+      "term": "be",
+      "count": 33
+    }
+  ],
+  "output_dir": "C:\\Itoni\\CS419\\final-project\\analysis"
+}
