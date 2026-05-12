@@ -13,6 +13,15 @@ def _resolve_path(path_str: str) -> Path:
     return path if path.is_absolute() else PROJECT_ROOT / path
 
 
+def _resolve_local_reference(reference: str) -> str:
+    path = Path(reference)
+    if path.is_absolute():
+        return str(path)
+
+    local_path = PROJECT_ROOT / path
+    return str(local_path) if local_path.exists() else reference
+
+
 @dataclass(slots=True)
 class PathsConfig:
     docs_dir: str
@@ -51,6 +60,10 @@ class IndexingConfig:
     faiss_metric: str = "cosine"
     top_k: int = 100
 
+    @property
+    def embedder_model_reference(self) -> str:
+        return _resolve_local_reference(self.embedder_model)
+
 
 @dataclass(slots=True)
 class RerankingConfig:
@@ -59,6 +72,10 @@ class RerankingConfig:
     device: str = "cpu"
     top_k_candidates: int = 100
     top_k_final: int = 10
+
+    @property
+    def model_reference(self) -> str:
+        return _resolve_local_reference(self.model)
 
 
 @dataclass(slots=True)

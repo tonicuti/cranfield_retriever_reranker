@@ -22,7 +22,7 @@ class RetrievalPipeline:
     @classmethod
     def from_settings(cls, settings: Settings) -> "RetrievalPipeline":
         embedder = EmbeddingModel(
-            model_name_or_path=settings.indexing.embedder_model,
+            model_name_or_path=settings.indexing.embedder_model_reference,
             device=settings.indexing.embedding_device,
             normalize_embeddings=settings.indexing.normalize_embeddings,
         )
@@ -35,7 +35,7 @@ class RetrievalPipeline:
         reranker = None
         if settings.reranking.enabled:
             reranker = RerankerModel(
-                model_name_or_path=settings.reranking.model,
+                model_name_or_path=settings.reranking.model_reference,
                 device=settings.reranking.device,
             )
 
